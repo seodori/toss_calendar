@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>회의 알림 프로토타입</title>
+  <style>
+    :root {
+      --blue: #2485ff;
+      --ink: #000;
+      --muted: #acacac;
+      --panel: #f5f5f5;
+      --danger: #fa6060;
+      --handle: #aaa;
+      font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px 0;
+      background: #e8edf3;
+      color: var(--ink);
+      letter-spacing: 0;
+    }
+
+    button {
+      border: 0;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .phone {
+      position: relative;
+      width: min(100vw, 360px);
+      height: 780px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 24px 70px rgba(20, 32, 52, .22);
+    }
+
+    .statusbar {
+      background: #fff;
+      height: 24px;
+      padding: 4px 8px 0 12px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      font: 700 14px/17px Roboto, sans-serif;
+      color: #303133;
+    }
+
+    .system-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 18px;
+    }
+
+    .wifi {
+      width: 15px;
+      height: 14px;
+      background: #303133;
+      clip-path: polygon(0 20%, 50% 100%, 100% 20%, 82% 0, 18% 0);
+    }
+
+    .signal {
+      width: 24px;
+      height: 18px;
+      background: #303133;
+      clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    }
+
+    .battery {
+      width: 16px;
+      height: 14px;
+      background: #303133;
+      border-radius: 2px 2px 1px 1px;
+      position: relative;
+    }
+
+    .battery::before {
+      content: "";
+      position: absolute;
+      top: -2px;
+      right: 3px;
+      width: 7px;
+      height: 2px;
+      background: #303133;
+      border-radius: 1px 1px 0 0;
+    }
+
+    .tabs {
+      position: absolute;
+      left: 16px;
+      top: 48px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      height: 29px;
+      white-space: nowrap;
+    }
+
+    .tab {
+      padding: 0;
+      background: transparent;
+      font-size: 24px;
+      line-height: 29px;
+      font-weight: 700;
+      letter-spacing: 0;
+      color: var(--muted);
+    }
+
+    .tab.active { color: var(--ink); }
+    .divider { font-size: 24px; color: var(--muted); }
+
+    .section-title {
+      position: absolute;
+      left: 16px;
+      top: 113px;
+      margin: 0;
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: 800;
+    }
+
+    .invite-strip {
+      position: absolute;
+      left: 16px;
+      top: 140px;
+      width: 636px;
+      display: flex;
+      gap: 12px;
+      transition: transform .25s ease;
+      touch-action: pan-y;
+      cursor: grab;
+    }
+
+    .invite-strip.is-dragging {
+      cursor: grabbing;
+      transition: none;
+    }
+
+    .invite-card {
+      width: 312px;
+      height: 100px;
+      border: 1px solid var(--blue);
+      border-radius: 8px;
+      padding: 19px 19px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+    }
+
+    .meeting-title {
+      margin: 0 0 8px;
+      font-size: 16px;
+      line-height: 21px;
+      font-weight: 800;
+    }
+
+    .meeting-meta {
+      margin: 0;
+      display: grid;
+      gap: 4px;
+      font-size: 12px;
+      line-height: 18px;
+      font-weight: 600;
+    }
+
+    .primary-btn {
+      min-width: 62px;
+      height: 34px;
+      padding: 0 10px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--blue);
+      color: #fff;
+      font-size: 12px;
+      line-height: 14px;
+      font-weight: 800;
+    }
+
+    .primary-btn:active { transform: translateY(1px); }
+
+    .calendar {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      top: 272px;
+    }
+
+    .calendar-head {
+      height: 24px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .month {
+      font-size: 18px;
+      line-height: 21px;
+      font-weight: 800;
+    }
+
+    .arrows {
+      display: flex;
+      gap: 12px;
+    }
+
+    .arrow {
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      background: transparent;
+      color: #878787;
+    }
+
+    .arrow::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-left: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg);
+    }
+
+    .arrow.next::before { transform: rotate(225deg); }
+
+    .dates {
+      position: relative;
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      height: 51px;
+      transition: height .28s ease;
+    }
+
+    .calendar.expanded .dates {
+      height: 294px;
+      grid-template-rows: repeat(6, 49px);
+    }
+
+    .date {
+      position: relative;
+      display: grid;
+      place-items: start center;
+      padding-top: 8px;
+      background: transparent;
+      color: #000;
+      font-size: 14px;
+      line-height: 17px;
+      font-weight: 600;
+    }
+
+    .date.sunday { color: var(--danger); }
+    .date.muted { color: #c5c5c5; }
+    .date.selected {
+      color: #fff;
+      font-weight: 800;
+      background: radial-gradient(circle 12px at 50% 16px, var(--blue) 98%, transparent 100%);
+    }
+
+    .dots {
+      position: absolute;
+      top: 32px;
+      left: 50%;
+      display: flex;
+      gap: 2px;
+      transform: translateX(-50%);
+    }
+
+    .dots i {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #ff5858;
+    }
+
+    .sheet {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 371px;
+      min-height: 504px;
+      border-radius: 22px 22px 0 0;
+      background: var(--panel);
+      transition: transform .28s ease;
+    }
+
+    .sheet.lowered { transform: translateY(300px); }
+
+    .sheet.lowered .meeting-list {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .handle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 88px;
+      height: 32px;
+      transform: translateX(-50%);
+      border-radius: 16px;
+      background: transparent;
+      z-index: 4;
+    }
+
+    .handle::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 10px;
+      width: 32px;
+      height: 4px;
+      transform: translateX(-50%);
+      border-radius: 99px;
+      background: var(--handle);
+    }
+
+    .meeting-list {
+      position: relative;
+      display: grid;
+      gap: 36px;
+      padding: 70px 0 0 70px;
+      width: 320px;
+    }
+
+    .meeting-list::before {
+      content: "";
+      position: absolute;
+      left: 75px;
+      top: 84px;
+      bottom: -420px;
+      width: 1px;
+      transform: translateX(-.5px);
+      background: #b8b8b8;
+    }
+
+    .meeting-list.is-empty::before,
+    .sheet.lowered .meeting-list::before {
+      display: none;
+    }
+
+    .list-item {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 42px;
+      border: 0;
+      padding: 0;
+      text-align: left;
+      background: transparent;
+      color: var(--ink);
+      -webkit-text-fill-color: var(--ink);
+      z-index: 1;
+    }
+
+    .list-item::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      margin-top: 4px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex: 0 0 auto;
+    }
+
+    .empty-list {
+      margin: 0;
+      padding: 0 24px 0 0;
+      color: #777;
+      font-size: 14px;
+      line-height: 22px;
+      font-weight: 600;
+    }
+
+    @media (max-height: 828px) {
+      body { place-items: start center; }
+    }
+  </style>
+</head>
+<body>
+  <main class="phone" aria-label="회의 알림 모바일 프로토타입">
+    <div class="statusbar">
+      <span>12:30</span>
+      <div class="system-icons" aria-hidden="true">
+        <span class="wifi"></span>
+        <span class="signal"></span>
+        <span class="battery"></span>
+      </div>
+    </div>
+
+    <nav class="tabs" aria-label="회의 메뉴">
+      <button class="tab active" type="button">회의 알림</button>
+      <span class="divider">|</span>
+      <button class="tab" type="button" id="createTab">회의 생성</button>
+    </nav>
+
+    <h1 class="section-title">초대된 회의</h1>
+
+    <section class="invite-strip" id="inviteStrip" aria-label="초대된 회의 카드">
+      <article class="invite-card" data-meeting-id="quarter-strategy">
+        <div>
+          <h2 class="meeting-title">분기 전략 회의</h2>
+          <p class="meeting-meta">
+            <span>7월 20일 (월) 14:00 - 15:00</span>
+            <span>대회의실 A</span>
+          </p>
+        </div>
+        <button class="primary-btn" type="button" data-meeting-id="quarter-strategy">확정하기</button>
+      </article>
+      <article class="invite-card" data-meeting-id="product-priority">
+        <div>
+          <h2 class="meeting-title">제품 우선순위 조율</h2>
+          <p class="meeting-meta">
+            <span>7월 20일 (월) 16:00 - 16:30</span>
+            <span>회의실 B</span>
+          </p>
+        </div>
+        <button class="primary-btn" type="button" data-meeting-id="product-priority">확정하기</button>
+      </article>
+    </section>
+
+    <section class="calendar" id="calendar" aria-label="월간 일정">
+      <div class="calendar-head">
+        <div class="month">2026. 7</div>
+        <div class="arrows">
+          <button class="arrow prev" type="button" aria-label="이전 주"></button>
+          <button class="arrow next" type="button" aria-label="다음 주"></button>
+        </div>
+      </div>
+      <div class="dates" id="dates"></div>
+    </section>
+
+    <section class="sheet" id="sheet" aria-label="회의 목록">
+      <button class="handle" type="button" id="sheetHandle" aria-label="회의 목록 내리기"></button>
+      <div class="meeting-list" id="meetingList"></div>
+    </section>
+  </main>
+
+  <script>
+    const calendar = document.querySelector('#calendar');
+    const dates = document.querySelector('#dates');
+    const inviteStrip = document.querySelector('#inviteStrip');
+    const meetingList = document.querySelector('#meetingList');
+    const sheet = document.querySelector('#sheet');
+    const meetings = [
+      { id: 'weekly-retro', date: '2026-07-19', title: '주간 회고', time: '7월 19일 (일) 10:00 - 10:30', place: '온라인' },
+      { id: 'quarter-strategy', date: '2026-07-20', title: '분기 전략 회의', time: '7월 20일 (월) 14:00 - 15:00', place: '대회의실 A' },
+      { id: 'product-priority', date: '2026-07-20', title: '제품 우선순위 조율', time: '7월 20일 (월) 16:00 - 16:30', place: '회의실 B' },
+      { id: 'design-review', date: '2026-07-21', title: '디자인 리뷰', time: '7월 21일 (화) 11:00 - 12:00', place: 'UX Lab' },
+      { id: 'sprint-planning', date: '2026-07-22', title: '스프린트 플래닝', time: '7월 22일 (수) 09:30 - 10:30', place: '프로젝트룸' },
+      { id: 'client-sync', date: '2026-07-23', title: '클라이언트 싱크', time: '7월 23일 (목) 15:00 - 15:45', place: '온라인' },
+      { id: 'interview', date: '2026-07-24', title: '채용 인터뷰', time: '7월 24일 (금) 13:00 - 14:00', place: '소회의실 C' },
+      { id: 'release-retro', date: '2026-07-24', title: '릴리즈 회고', time: '7월 24일 (금) 17:00 - 17:30', place: '대회의실 A' },
+      { id: 'kickoff', date: '2026-07-27', title: '신규 프로젝트 킥오프', time: '7월 27일 (월) 10:00 - 11:00', place: '대회의실 A' },
+      { id: 'ops-check', date: '2026-07-29', title: '운영 점검', time: '7월 29일 (수) 14:30 - 15:00', place: '회의실 B' },
+      { id: 'prototype-demo', date: '2026-08-01', title: '프로토타입 데모', time: '8월 1일 (토) 11:00 - 11:30', place: '온라인' }
+    ];
+    let weekStart = new Date(2026, 6, 19);
+    let selectedDate = new Date(2026, 6, 20);
+    let expanded = false;
+    let inviteIndex = 0;
+    let dragStartX = 0;
+    let dragCurrentX = 0;
+    let isDraggingInvite = false;
+    let suppressInviteClick = false;
+
+    function pad(value) {
+      return String(value).padStart(2, '0');
+    }
+
+    function key(date) {
+      return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+    }
+
+    function sameDay(a, b) {
+      return key(a) === key(b);
+    }
+
+    function addDays(date, days) {
+      const next = new Date(date);
+      next.setDate(next.getDate() + days);
+      return next;
+    }
+
+    function startOfWeek(date) {
+      return addDays(date, -date.getDay());
+    }
+
+    function goToDetail(meetingId) {
+      const meeting = meetings.find((item) => item.id === meetingId) || meetings.find((item) => item.date === key(selectedDate));
+      const params = new URLSearchParams(meeting || {
+        title: '회의 상세',
+        time: `${selectedDate.getMonth() + 1}월 ${selectedDate.getDate()}일`,
+        place: '장소 미정'
+      });
+      window.location.assign(new URL(`detail.html?${params.toString()}`, window.location.href).href);
+    }
+
+    function renderInviteSlider(offset = 0) {
+      inviteStrip.style.transform = `translateX(${(-inviteIndex * 324) + offset}px)`;
+    }
+
+    function makeDateButton(date, muted = false) {
+      const button = document.createElement('button');
+      button.className = 'date';
+      button.type = 'button';
+      button.textContent = date.getDate();
+      button.dataset.date = key(date);
+
+      if (date.getDay() === 0) button.classList.add('sunday');
+      if (muted) button.classList.add('muted');
+      if (sameDay(date, selectedDate)) button.classList.add('selected');
+
+      const meetingCount = meetings.filter((meeting) => meeting.date === key(date)).length;
+      if (meetingCount > 0) {
+        const dots = document.createElement('span');
+        dots.className = 'dots';
+        for (let index = 0; index < meetingCount; index += 1) {
+          dots.appendChild(document.createElement('i'));
+        }
+        button.appendChild(dots);
+      }
+
+      button.addEventListener('click', () => {
+        selectedDate = new Date(date);
+        if (expanded) {
+          weekStart = startOfWeek(selectedDate);
+          expanded = false;
+          sheet.classList.remove('lowered');
+          document.querySelector('#sheetHandle').setAttribute('aria-label', '회의 목록 내리기');
+        }
+        renderCalendar();
+        renderMeetings();
+      });
+
+      return button;
+    }
+
+    function renderMeetings() {
+      const selectedKey = key(selectedDate);
+      const items = meetings.filter((meeting) => meeting.date === selectedKey);
+
+      if (!items.length) {
+        const empty = document.createElement('p');
+        empty.className = 'empty-list';
+        empty.textContent = `${selectedDate.getMonth() + 1}월 ${selectedDate.getDate()}일에는 예정된 회의가 없습니다.`;
+        meetingList.classList.add('is-empty');
+        meetingList.replaceChildren(empty);
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+      meetingList.classList.remove('is-empty');
+      items.forEach((meeting) => {
+        const button = document.createElement('button');
+        button.className = 'list-item';
+        button.type = 'button';
+        button.innerHTML = `
+          <span>
+            <strong class="meeting-title">${meeting.title}</strong>
+            <span class="meeting-meta">
+              <span>${meeting.time}</span>
+              <span>${meeting.place}</span>
+            </span>
+          </span>
+        `;
+        button.addEventListener('click', () => goToDetail(meeting.id));
+        fragment.appendChild(button);
+      });
+
+      meetingList.replaceChildren(fragment);
+    }
+
+    function renderWeek() {
+      const fragment = document.createDocumentFragment();
+      for (let index = 0; index < 7; index += 1) {
+        fragment.appendChild(makeDateButton(addDays(weekStart, index)));
+      }
+      dates.replaceChildren(fragment);
+    }
+
+    function renderMonth() {
+      const year = weekStart.getFullYear();
+      const month = weekStart.getMonth();
+      const first = new Date(year, month, 1);
+      const gridStart = addDays(first, -first.getDay());
+      const fragment = document.createDocumentFragment();
+
+      for (let index = 0; index < 42; index += 1) {
+        const date = addDays(gridStart, index);
+        fragment.appendChild(makeDateButton(date, date.getMonth() !== month));
+      }
+
+      dates.replaceChildren(fragment);
+    }
+
+    function renderCalendar() {
+      document.querySelector('.month').textContent = `${weekStart.getFullYear()}. ${weekStart.getMonth() + 1}`;
+      calendar.classList.toggle('expanded', expanded);
+      if (expanded) renderMonth();
+      else renderWeek();
+    }
+
+    document.querySelectorAll('.primary-btn').forEach((target) => {
+      target.addEventListener('click', (event) => {
+        event.stopPropagation();
+        goToDetail(target.dataset.meetingId);
+      });
+    });
+
+    document.querySelectorAll('.invite-card').forEach((card) => {
+      card.addEventListener('click', () => {
+        goToDetail(card.dataset.meetingId);
+      });
+    });
+
+    inviteStrip.addEventListener('click', (event) => {
+      if (!suppressInviteClick) return;
+      event.preventDefault();
+      event.stopPropagation();
+      suppressInviteClick = false;
+    }, true);
+
+    inviteStrip.addEventListener('pointerdown', (event) => {
+      dragStartX = event.clientX;
+      dragCurrentX = event.clientX;
+      isDraggingInvite = true;
+      suppressInviteClick = false;
+      inviteStrip.classList.add('is-dragging');
+      inviteStrip.setPointerCapture(event.pointerId);
+    });
+
+    inviteStrip.addEventListener('pointermove', (event) => {
+      if (!isDraggingInvite) return;
+      dragCurrentX = event.clientX;
+      const offset = Math.max(-96, Math.min(96, dragCurrentX - dragStartX));
+      renderInviteSlider(offset);
+    });
+
+    inviteStrip.addEventListener('pointerup', (event) => {
+      if (!isDraggingInvite) return;
+      const delta = event.clientX - dragStartX;
+      isDraggingInvite = false;
+      inviteStrip.classList.remove('is-dragging');
+
+      if (Math.abs(delta) <= 8) {
+        const target = document.elementFromPoint(event.clientX, event.clientY);
+        const card = target && target.closest ? target.closest('.invite-card') : null;
+        if (card) goToDetail(card.dataset.meetingId);
+        renderInviteSlider();
+        return;
+      }
+
+      suppressInviteClick = true;
+      if (delta < -48) inviteIndex = Math.min(inviteIndex + 1, inviteStrip.children.length - 1);
+      if (delta > 48) inviteIndex = Math.max(inviteIndex - 1, 0);
+      renderInviteSlider();
+      window.setTimeout(() => {
+        suppressInviteClick = false;
+      }, 0);
+    });
+
+    inviteStrip.addEventListener('pointercancel', () => {
+      isDraggingInvite = false;
+      inviteStrip.classList.remove('is-dragging');
+      renderInviteSlider();
+    });
+
+    document.querySelector('.arrow.next').addEventListener('click', () => {
+      weekStart = addDays(weekStart, 7);
+      selectedDate = addDays(selectedDate, 7);
+      renderCalendar();
+      renderMeetings();
+    });
+
+    document.querySelector('.arrow.prev').addEventListener('click', () => {
+      weekStart = addDays(weekStart, -7);
+      selectedDate = addDays(selectedDate, -7);
+      renderCalendar();
+      renderMeetings();
+    });
+
+    document.querySelector('#sheetHandle').addEventListener('click', () => {
+      expanded = !expanded;
+      sheet.classList.toggle('lowered', expanded);
+      document.querySelector('#sheetHandle').setAttribute(
+        'aria-label',
+        expanded ? '회의 목록 올리기' : '회의 목록 내리기'
+      );
+      renderCalendar();
+    });
+
+    document.querySelector('#createTab').addEventListener('click', () => {
+      window.location.href = 'create.html';
+    });
+
+    renderCalendar();
+    renderMeetings();
+    renderInviteSlider();
+  </script>
+</body>
+</html>
