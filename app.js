@@ -4,7 +4,7 @@
    =========================================================================== */
 
 /* ---------- 아이콘 (lucide 원본 SVG path) ------------------------------- */
-const ICONS = {"ChevronDown":"<path d=\"m6 9 6 6 6-6\"></path>","Search":"<circle cx=\"11\" cy=\"11\" r=\"8\"></circle><path d=\"m21 21-4.3-4.3\"></path>","X":"<path d=\"M18 6 6 18\"></path><path d=\"m6 6 12 12\"></path>","Settings":"<path d=\"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z\"></path><circle cx=\"12\" cy=\"12\" r=\"3\"></circle>","LogOut":"<path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\"></path><polyline points=\"16 17 21 12 16 7\"></polyline><line x1=\"21\" x2=\"9\" y1=\"12\" y2=\"12\"></line>","Shield":"<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\"></path>","HelpCircle":"<circle cx=\"12\" cy=\"12\" r=\"10\"></circle><path d=\"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3\"></path><path d=\"M12 17h.01\"></path>","Pencil":"<path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\"></path><path d=\"m15 5 4 4\"></path>","Check":"<path d=\"M20 6 9 17l-5-5\"></path>","ChevronLeft":"<path d=\"m15 18-6-6 6-6\"></path>","ChevronRight":"<path d=\"m9 18 6-6-6-6\"></path>","Bell":"<path d=\"M10.268 21a2 2 0 0 0 3.464 0\"></path><path d=\"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326\"></path>","Plus":"<path d=\"M5 12h14\"></path><path d=\"M12 5v14\"></path>","Home":"<path d=\"M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8\"></path><path d=\"M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"></path>","Calendar":"<path d=\"M8 2v4\"></path><path d=\"M16 2v4\"></path><rect width=\"18\" height=\"18\" x=\"3\" y=\"4\" rx=\"2\"></rect><path d=\"M3 10h18\"></path>","ClipboardList":"<rect width=\"8\" height=\"4\" x=\"8\" y=\"2\" rx=\"1\" ry=\"1\"></rect><path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\"></path><path d=\"M12 11h4\"></path><path d=\"M12 16h4\"></path><path d=\"M8 11h.01\"></path><path d=\"M8 16h.01\"></path>","User":"<path d=\"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2\"></path><circle cx=\"12\" cy=\"7\" r=\"4\"></circle>","Smile":"<circle cx=\"12\" cy=\"12\" r=\"10\"></circle><path d=\"M8 14s1.5 2 4 2 4-2 4-2\"></path><line x1=\"9\" x2=\"9.01\" y1=\"9\" y2=\"9\"></line><line x1=\"15\" x2=\"15.01\" y1=\"9\" y2=\"9\"></line>","Utensils":"<path d=\"M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2\"></path><path d=\"M7 2v20\"></path><path d=\"M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7\"></path>","Plane":"<path d=\"M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z\"></path>","Palmtree":"<path d=\"M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4\"></path><path d=\"M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3\"></path><path d=\"M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35\"></path><path d=\"M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14\"></path>","MoreHorizontal":"<circle cx=\"12\" cy=\"12\" r=\"1\"></circle><circle cx=\"19\" cy=\"12\" r=\"1\"></circle><circle cx=\"5\" cy=\"12\" r=\"1\"></circle>","Sparkles":"<path d=\"M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z\"></path><path d=\"M20 2v4\"></path><path d=\"M22 4h-4\"></path><circle cx=\"4\" cy=\"20\" r=\"2\"></circle>","Users":"<path d=\"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2\"></path><path d=\"M16 3.128a4 4 0 0 1 0 7.744\"></path><path d=\"M22 21v-2a4 4 0 0 0-3-3.87\"></path><circle cx=\"9\" cy=\"7\" r=\"4\"></circle>","Clock":"<circle cx=\"12\" cy=\"12\" r=\"10\"></circle><path d=\"M12 6v6l4 2\"></path>","Send":"<path d=\"M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z\"></path><path d=\"m21.854 2.147-10.94 10.939\"></path>","Sunrise":"<path d=\"M12 2v8\"></path><path d=\"m4.93 10.93 1.41 1.41\"></path><path d=\"M2 18h2\"></path><path d=\"M20 18h2\"></path><path d=\"m19.07 10.93-1.41 1.41\"></path><path d=\"M22 22H2\"></path><path d=\"m8 6 4-4 4 4\"></path><path d=\"M16 18a4 4 0 0 0-8 0\"></path>","Sunset":"<path d=\"M12 10V2\"></path><path d=\"m4.93 10.93 1.41 1.41\"></path><path d=\"M2 18h2\"></path><path d=\"M20 18h2\"></path><path d=\"m19.07 10.93-1.41 1.41\"></path><path d=\"M22 22H2\"></path><path d=\"m16 6-4 4-4-4\"></path><path d=\"M16 18a4 4 0 0 0-8 0\"></path>","Target":"<circle cx=\"12\" cy=\"12\" r=\"10\"></circle><circle cx=\"12\" cy=\"12\" r=\"6\"></circle><circle cx=\"12\" cy=\"12\" r=\"2\"></circle>","Repeat":"<path d=\"m17 2 4 4-4 4\"></path><path d=\"M3 11v-1a4 4 0 0 1 4-4h14\"></path><path d=\"m7 22-4-4 4-4\"></path><path d=\"M21 13v1a4 4 0 0 1-4 4H3\"></path>","CalendarDays":"<path d=\"M8 2v4\"></path><path d=\"M16 2v4\"></path><rect width=\"18\" height=\"18\" x=\"3\" y=\"4\" rx=\"2\"></rect><path d=\"M3 10h18\"></path><path d=\"M8 14h.01\"></path><path d=\"M12 14h.01\"></path><path d=\"M16 14h.01\"></path><path d=\"M8 18h.01\"></path><path d=\"M12 18h.01\"></path><path d=\"M16 18h.01\"></path>","Circle":"<circle cx=\"12\" cy=\"12\" r=\"10\"></circle>","MessageCircle":"<path d=\"M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719\"></path>","CheckCircle2":"<circle cx=\"12\" cy=\"12\" r=\"10\"></circle><path d=\"m9 12 2 2 4-4\"></path>"};
+const ICONS = {"ChevronUp":"<path d=\"m18 15-6-6-6 6\"></path>","ChevronDown":"<path d=\"m6 9 6 6 6-6\"></path>","Search":"<circle cx=\"11\" cy=\"11\" r=\"8\"></circle><path d=\"m21 21-4.3-4.3\"></path>","X":"<path d=\"M18 6 6 18\"></path><path d=\"m6 6 12 12\"></path>","Settings":"<path d=\"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z\"></path><circle cx=\"12\" cy=\"12\" r=\"3\"></circle>","LogOut":"<path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\"></path><polyline points=\"16 17 21 12 16 7\"></polyline><line x1=\"21\" x2=\"9\" y1=\"12\" y2=\"12\"></line>","Shield":"<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\"></path>","HelpCircle":"<circle cx=\"12\" cy=\"12\" r=\"10\"></circle><path d=\"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3\"></path><path d=\"M12 17h.01\"></path>","Pencil":"<path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\"></path><path d=\"m15 5 4 4\"></path>","Check":"<path d=\"M20 6 9 17l-5-5\"></path>","ChevronLeft":"<path d=\"m15 18-6-6 6-6\"></path>","ChevronRight":"<path d=\"m9 18 6-6-6-6\"></path>","Bell":"<path d=\"M10.268 21a2 2 0 0 0 3.464 0\"></path><path d=\"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326\"></path>","Plus":"<path d=\"M5 12h14\"></path><path d=\"M12 5v14\"></path>","Home":"<path d=\"M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8\"></path><path d=\"M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"></path>","Calendar":"<path d=\"M8 2v4\"></path><path d=\"M16 2v4\"></path><rect width=\"18\" height=\"18\" x=\"3\" y=\"4\" rx=\"2\"></rect><path d=\"M3 10h18\"></path>","ClipboardList":"<rect width=\"8\" height=\"4\" x=\"8\" y=\"2\" rx=\"1\" ry=\"1\"></rect><path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\"></path><path d=\"M12 11h4\"></path><path d=\"M12 16h4\"></path><path d=\"M8 11h.01\"></path><path d=\"M8 16h.01\"></path>","User":"<path d=\"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2\"></path><circle cx=\"12\" cy=\"7\" r=\"4\"></circle>","Smile":"<circle cx=\"12\" cy=\"12\" r=\"10\"></circle><path d=\"M8 14s1.5 2 4 2 4-2 4-2\"></path><line x1=\"9\" x2=\"9.01\" y1=\"9\" y2=\"9\"></line><line x1=\"15\" x2=\"15.01\" y1=\"9\" y2=\"9\"></line>","Utensils":"<path d=\"M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2\"></path><path d=\"M7 2v20\"></path><path d=\"M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7\"></path>","Plane":"<path d=\"M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z\"></path>","Palmtree":"<path d=\"M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4\"></path><path d=\"M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3\"></path><path d=\"M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35\"></path><path d=\"M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14\"></path>","MoreHorizontal":"<circle cx=\"12\" cy=\"12\" r=\"1\"></circle><circle cx=\"19\" cy=\"12\" r=\"1\"></circle><circle cx=\"5\" cy=\"12\" r=\"1\"></circle>","Sparkles":"<path d=\"M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z\"></path><path d=\"M20 2v4\"></path><path d=\"M22 4h-4\"></path><circle cx=\"4\" cy=\"20\" r=\"2\"></circle>","Users":"<path d=\"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2\"></path><path d=\"M16 3.128a4 4 0 0 1 0 7.744\"></path><path d=\"M22 21v-2a4 4 0 0 0-3-3.87\"></path><circle cx=\"9\" cy=\"7\" r=\"4\"></circle>","Clock":"<circle cx=\"12\" cy=\"12\" r=\"10\"></circle><path d=\"M12 6v6l4 2\"></path>","Send":"<path d=\"M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z\"></path><path d=\"m21.854 2.147-10.94 10.939\"></path>","Sunrise":"<path d=\"M12 2v8\"></path><path d=\"m4.93 10.93 1.41 1.41\"></path><path d=\"M2 18h2\"></path><path d=\"M20 18h2\"></path><path d=\"m19.07 10.93-1.41 1.41\"></path><path d=\"M22 22H2\"></path><path d=\"m8 6 4-4 4 4\"></path><path d=\"M16 18a4 4 0 0 0-8 0\"></path>","Sunset":"<path d=\"M12 10V2\"></path><path d=\"m4.93 10.93 1.41 1.41\"></path><path d=\"M2 18h2\"></path><path d=\"M20 18h2\"></path><path d=\"m19.07 10.93-1.41 1.41\"></path><path d=\"M22 22H2\"></path><path d=\"m16 6-4 4-4-4\"></path><path d=\"M16 18a4 4 0 0 0-8 0\"></path>","Target":"<circle cx=\"12\" cy=\"12\" r=\"10\"></circle><circle cx=\"12\" cy=\"12\" r=\"6\"></circle><circle cx=\"12\" cy=\"12\" r=\"2\"></circle>","Repeat":"<path d=\"m17 2 4 4-4 4\"></path><path d=\"M3 11v-1a4 4 0 0 1 4-4h14\"></path><path d=\"m7 22-4-4 4-4\"></path><path d=\"M21 13v1a4 4 0 0 1-4 4H3\"></path>","CalendarDays":"<path d=\"M8 2v4\"></path><path d=\"M16 2v4\"></path><rect width=\"18\" height=\"18\" x=\"3\" y=\"4\" rx=\"2\"></rect><path d=\"M3 10h18\"></path><path d=\"M8 14h.01\"></path><path d=\"M12 14h.01\"></path><path d=\"M16 14h.01\"></path><path d=\"M8 18h.01\"></path><path d=\"M12 18h.01\"></path><path d=\"M16 18h.01\"></path>","Circle":"<circle cx=\"12\" cy=\"12\" r=\"10\"></circle>","MessageCircle":"<path d=\"M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719\"></path>","CheckCircle2":"<circle cx=\"12\" cy=\"12\" r=\"10\"></circle><path d=\"m9 12 2 2 4-4\"></path>"};
 
 function icon(name, size = 24, opts = {}) {
   const sw = opts.stroke || 2;
@@ -183,7 +183,7 @@ function resetUI() {
   UI.onb = { step: 0, prefs: { am: false, pm: false, any: false }, name: '', team: '', role: '', times: [{ start: '09:00', end: '11:00' }],
     recurring: { lunch: { start: '12:00', end: '13:00' } }, editing: null, draft: null };
   UI.newM = { step: 1, title: '', picked: [], roles: {}, custom: {}, search: '', start: '2026-07-13', end: '2026-07-17', duration: 60 };
-  UI.resp = { choices: [], busyDate: '', busyStart: '09:00', busyEnd: '14:00', offDate: '', offStart: '09:00', offEnd: '18:00', done: false };
+  UI.resp = { choices: [], fwItems: [], offItems: [], etcItems: [], done: false };
   UI.detailTab = 'status';
   UI.rec = { step: 1, duration: 60 };
   UI.cal = { month: '2026-07', selected: fmtLocalDate(new Date()) };
@@ -464,13 +464,15 @@ Views.onboarding = () => {
         ${RECURRING.map(([k, label, ic]) => {
           const set = o.recurring[k];
           const editing = o.editing === k;
+          const daysLabel = set && set.days && set.days.length ? set.days.slice().sort((a, b) => a - b).map((i) => WD[i]).join('·') + ' · ' : '';
           return `<div class="routine-card ${set || editing ? 'on' : ''}">
             <button class="routine-head press" onclick="App.onbEditRecurring('${k}')">
               <span class="icon-badge ${set ? 'on' : ''}">${icon(ic, 17)}</span>
-              <div class="grow"><p style="font-size:14px;font-weight:600">${label}</p><p class="small" style="margin-top:1px;${set ? 'color:var(--primary-dark);font-weight:500' : 'color:var(--sub)'}">${set ? `${ampmTime(set.start)} - ${ampmTime(set.end)}` : '설정하기'}</p></div>
-              ${set ? `<span style="display:flex;width:22px;height:22px;align-items:center;justify-content:center;border-radius:50%;background:var(--primary);color:#fff">${icon('Check', 13, { stroke: 3 })}</span>` : icon(editing ? 'ChevronLeft' : 'ChevronRight', 18, { cls: 'icon-sub' })}
+              <div class="grow"><p style="font-size:14px;font-weight:600">${label}</p><p class="small" style="margin-top:1px;${set ? 'color:var(--primary-dark);font-weight:500' : 'color:var(--sub)'}">${set ? `${daysLabel}${ampmTime(set.start)} - ${ampmTime(set.end)}` : '설정하기'}</p></div>
+              ${icon(editing ? 'ChevronUp' : 'ChevronDown', 18, { cls: 'icon-sub' })}
             </button>
             ${editing ? `<div class="routine-edit">
+              ${k !== 'lunch' ? `<div class="te-row" style="align-items:flex-start"><span class="te-label" style="padding-top:8px">요일</span><div class="day-row">${WD.map((d, di) => `<button class="day-chip ${(o.draft.days || []).includes(di) ? 'active' : ''}" onclick="App.onbDraftDay(${di})">${d}</button>`).join('')}</div></div>` : ''}
               <div class="te-row"><span class="te-label">시작 시간</span>${timePick('start')}</div>
               <div class="te-row"><span class="te-label">종료 시간</span>${timePick('end')}</div>
               <div class="row gap8" style="margin-top:14px">
@@ -762,6 +764,15 @@ Views.respond = (id) => {
     ['off', '휴가 / 부재', 'Palmtree'],
     ['etc', '기타', 'MoreHorizontal'],
   ];
+  const listOf = { fieldwork: 'fwItems', off: 'offItems', etc: 'etcItems' };
+  const itemsBlock = (list, withLabel) => `<div class="opt-times">
+    ${(r[list] || []).map((it, i) => `<div class="etc-item">
+      ${withLabel || r[list].length > 1 ? `<div class="row-between" style="margin-bottom:2px">${withLabel ? `<span class="etc-label">${esc(it.label)}</span>` : '<span></span>'}${r[list].length > 1 ? `<button class="etc-del press" aria-label="삭제" onclick="App.respItemDel('${list}',${i})">${icon('X', 15, { cls: 'icon-sub' })}</button>` : ''}</div>` : ''}
+      <input class="input compact" type="date" value="${it.date || m.rangeStart}" oninput="App.respItemField('${list}',${i},'date',this.value)">
+      <div class="row gap8" style="margin-top:8px"><input class="input compact grow" value="${it.start}" oninput="App.respItemField('${list}',${i},'start',this.value)"><span class="muted">~</span><input class="input compact grow" value="${it.end}" oninput="App.respItemField('${list}',${i},'end',this.value)"></div>
+    </div>`).join('')}
+    <button class="etc-add press" onclick="App.respItemAdd('${list}')">${icon('Plus', 16, { stroke: 2.4 })} 일정 추가</button>
+  </div>`;
   return `<div class="screen">${topbar('회의 가능 시간', '#/meetings/' + id, { cur: 1, total: 2 })}
     <div class="scroll pad grow">
       <h1 class="h2" style="font-size:18px">회의 가능 시간을<br>알려주세요</h1><p class="lead">해당하는 항목을 모두 선택해주세요. (여러 개 선택 가능)</p>
@@ -769,16 +780,12 @@ Views.respond = (id) => {
         ${opts
           .map(([k, label, ic]) => {
             const on = r.choices.includes(k);
-            return `<button class="option ${on ? 'selected' : ''}" onclick="App.respChoice('${k}')">${icon(ic, 19, { cls: on ? 'icon-primary' : 'icon-sub' })}${label}${on ? `<span style="margin-left:auto">${icon('Check', 18, { stroke: 2.5, cls: 'icon-primary' })}</span>` : ''}</button>`;
+            const btn = `<button class="option ${on ? 'selected' : ''}" onclick="App.respChoice('${k}')">${icon(ic, 19, { cls: on ? 'icon-primary' : 'icon-sub' })}${label}${on ? `<span style="margin-left:auto">${icon('Check', 18, { stroke: 2.5, cls: 'icon-primary' })}</span>` : ''}</button>`;
+            const block = on && listOf[k] ? itemsBlock(listOf[k], k === 'etc') : '';
+            return block ? `<div class="opt-group">${btn}${block}</div>` : btn;
           })
           .join('')}
       </div>
-      ${r.choices.includes('fieldwork') ? `<div style="margin-top:20px"><p class="title">외근 시간</p>
-        <input class="input compact" type="date" value="${r.busyDate || m.rangeStart}" style="margin-top:8px" oninput="App.respField('busyDate',this.value)">
-        <div class="row gap8" style="margin-top:8px"><input class="input compact grow" value="${r.busyStart}" oninput="App.respField('busyStart',this.value)"><span class="muted">~</span><input class="input compact grow" value="${r.busyEnd}" oninput="App.respField('busyEnd',this.value)"></div></div>` : ''}
-      ${r.choices.includes('off') ? `<div style="margin-top:20px"><p class="title">휴가 / 부재 일정</p>
-        <input class="input compact" type="date" value="${r.offDate || m.rangeStart}" style="margin-top:8px" oninput="App.respField('offDate',this.value)">
-        <div class="row gap8" style="margin-top:8px"><input class="input compact grow" value="${r.offStart}" oninput="App.respField('offStart',this.value)"><span class="muted">~</span><input class="input compact grow" value="${r.offEnd}" oninput="App.respField('offEnd',this.value)"></div></div>` : ''}
     </div>
     <div class="footer"><button class="btn btn-primary btn-block press" ${r.choices.length ? '' : 'disabled'} onclick="App.respSubmit('${id}')">다음</button></div></div>`;
 };
@@ -943,8 +950,16 @@ const App = {
     } else {
       UI.onb.editing = k;
       UI.onb.draft = { ...(UI.onb.recurring[k] || { start: '12:00', end: '13:00' }) };
+      if (k !== 'lunch' && !UI.onb.draft.days) UI.onb.draft.days = [];
     }
     UI.onb.timeOpen = null;
+    render();
+  },
+  onbDraftDay(d) {
+    const days = UI.onb.draft.days || (UI.onb.draft.days = []);
+    const i = days.indexOf(d);
+    if (i >= 0) days.splice(i, 1);
+    else days.push(d);
     render();
   },
   onbToggleTime(field) {
@@ -1092,10 +1107,30 @@ const App = {
       next = next.includes(k) ? next.filter((x) => x !== k) : [...next, k];
       UI.resp.choices = next;
     }
+    if (UI.resp.choices.includes('etc') && (!UI.resp.etcItems || !UI.resp.etcItems.length)) {
+      UI.resp.etcItems = [{ label: '기타 일정', date: '', start: '09:00', end: '18:00' }];
+    }
+    if (UI.resp.choices.includes('fieldwork') && !UI.resp.fwItems.length) UI.resp.fwItems = [{ date: '', start: '09:00', end: '14:00' }];
+    if (UI.resp.choices.includes('off') && !UI.resp.offItems.length) UI.resp.offItems = [{ date: '', start: '09:00', end: '18:00' }];
     render();
   },
   respField(k, v) {
     UI.resp[k] = v;
+  },
+  respItemField(list, i, key, v) {
+    UI.resp[list][i][key] = v;
+  },
+  respItemAdd(list) {
+    UI.resp[list].push(list === 'etcItems' ? { label: '기타 일정', date: '', start: '09:00', end: '18:00' } : { date: '', start: '09:00', end: '18:00' });
+    render();
+  },
+  respItemDel(list, i) {
+    UI.resp[list].splice(i, 1);
+    if (!UI.resp[list].length) {
+      const ck = { fwItems: 'fieldwork', offItems: 'off', etcItems: 'etc' }[list];
+      UI.resp.choices = UI.resp.choices.filter((x) => x !== ck);
+    }
+    render();
   },
   respSubmit(id) {
     const r = UI.resp;
@@ -1103,8 +1138,9 @@ const App = {
     const choices = r.choices;
     const availability = choices.includes('off') ? 'off' : choices.includes('avoid_lunch') ? 'avoid_lunch' : 'anytime';
     const busyRanges = [];
-    if (choices.includes('fieldwork')) busyRanges.push({ date: r.busyDate || m.rangeStart, start: r.busyStart, end: r.busyEnd });
-    if (choices.includes('off')) busyRanges.push({ date: r.offDate || m.rangeStart, start: r.offStart, end: r.offEnd });
+    if (choices.includes('fieldwork')) (r.fwItems || []).forEach((it) => busyRanges.push({ date: it.date || m.rangeStart, start: it.start, end: it.end }));
+    if (choices.includes('off')) (r.offItems || []).forEach((it) => busyRanges.push({ date: it.date || m.rangeStart, start: it.start, end: it.end }));
+    if (choices.includes('etc')) (r.etcItems || []).forEach((it) => busyRanges.push({ date: it.date || m.rangeStart, start: it.start, end: it.end }));
     State.addResponse({ meetingId: id, participantId: 'me', availability, choices, busyRanges });
     // 데모: 내가 응답을 마치면 나머지 팀원 응답도 도착한 것으로 처리
     const sim = ['anytime', 'avoid_lunch', 'anytime', 'anytime', 'anytime', 'anytime'];
@@ -1185,7 +1221,20 @@ function render() {
       save(K.responses, []);
     }
     if (base === 'meetings' && parts[1] === 'new') UI.newM = { step: 1, title: '', picked: [], roles: {}, custom: {}, search: '', start: '2026-07-13', end: '2026-07-17', duration: 60 };
-    if (base === 'respond') UI.resp = { choices: [], busyDate: '', busyStart: '09:00', busyEnd: '14:00', offDate: '', offStart: '09:00', offEnd: '18:00', done: false };
+    if (base === 'respond') {
+      const rec = (State.user && State.user.recurring) || {};
+      const seeded = [];
+      if (rec.lunch) seeded.push('avoid_lunch');
+      const fwItems = [];
+      if (rec.fieldwork) fwItems.push({ date: '', start: rec.fieldwork.start, end: rec.fieldwork.end });
+      if (fwItems.length) seeded.push('fieldwork');
+      const etcItems = [];
+      [['regular', '정기회의'], ['focus', '집중시간'], ['etc', '기타 일정']].forEach(([key, lbl]) => {
+        if (rec[key]) etcItems.push({ label: lbl, date: '', start: rec[key].start, end: rec[key].end });
+      });
+      if (etcItems.length) seeded.push('etc');
+      UI.resp = { choices: seeded, fwItems, offItems: [], etcItems, done: false };
+    }
     if (base === 'meetings' && parts[1] && parts[1] !== 'new') UI.detailTab = 'status';
     if (base === 'calendar') { UI.cal = UI._calPending || { month: '2026-07', selected: fmtLocalDate(new Date()) }; UI._calPending = null; }
     if (base === 'meetings' && !parts[1]) UI.mlist = { filter: 'all' };

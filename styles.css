@@ -1154,7 +1154,6 @@ svg {
 }
 .routine-edit {
   padding: 4px 16px 16px;
-  animation: routeIn 0.24s ease both;
 }
 .te-row {
   display: flex;
@@ -1169,6 +1168,86 @@ svg {
   color: var(--sub);
   white-space: nowrap;
   flex-shrink: 0;
+}
+.day-row {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.day-chip {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--white);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sub);
+  transition: background 0.14s, color 0.14s, border-color 0.14s;
+}
+.day-chip.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+/* 응답 옵션에 붙는 시간 입력 (제목 없이 하단에 부착) */
+.opt-group {
+  border: 1px solid var(--primary);
+  border-radius: var(--r-md);
+  background: var(--primary-light);
+  overflow: hidden;
+}
+.opt-group .option {
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+}
+.opt-times {
+  padding: 0 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.opt-times .input {
+  background-color: var(--white);
+}
+.etc-item {
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(63, 185, 165, 0.25);
+}
+.etc-item:last-of-type {
+  border-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 4px;
+}
+.etc-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+.etc-del {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+.etc-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--r-md);
+  border: 1px dashed rgba(63, 185, 165, 0.5);
+  background: var(--white);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-dark);
 }
 .ampm-seg {
   display: flex;
