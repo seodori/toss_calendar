@@ -55,12 +55,12 @@ function esc(s) {
 /* ---------- 시드 데이터 ------------------------------------------------- */
 const seedParticipants = [
   { id: 'me', name: '성명', avatarColor: '#3FB9A5' },
-  { id: 'minsu', name: '민수', avatarColor: '#6C8AE4' },
-  { id: 'jieun', name: '지은', avatarColor: '#E48AB0' },
-  { id: 'hyunwoo', name: '현우', avatarColor: '#E4B36C' },
-  { id: 'seohyun', name: '서현', avatarColor: '#8A6CE4' },
-  { id: 'jiho', name: '지호', avatarColor: '#6CC9E4' },
-  { id: 'dahye', name: '다혜', avatarColor: '#E47A7A' },
+  { id: 'minsu', name: '김민수', avatarColor: '#6C8AE4' },
+  { id: 'jieun', name: '이지은', avatarColor: '#E48AB0' },
+  { id: 'hyunwoo', name: '박현우', avatarColor: '#E4B36C' },
+  { id: 'seohyun', name: '최서현', avatarColor: '#8A6CE4' },
+  { id: 'jiho', name: '정지호', avatarColor: '#6CC9E4' },
+  { id: 'dahye', name: '강다혜', avatarColor: '#E47A7A' },
 ];
 // 주최자(나)를 제외한 초대 가능 인원 (총 6명)
 const invitablePool = seedParticipants.filter((p) => p.id !== 'me');
