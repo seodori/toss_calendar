@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>accord — 디자인 핸드오프</title>
+    <!-- Pretendard 웹폰트 (인터넷 없이 열면 시스템 한글 폰트로 대체됨). 필요 없으면 이 줄만 지우세요. -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preload" as="image" href="assets/logo-white.png" />
+    <link rel="preload" as="image" href="assets/logo-check.png" />
+    <link rel="preload" as="image" href="assets/logo-mark.png" />
+    <link rel="preload" as="image" href="assets/logo-word.png" />
+  </head>
+  <body>
+    <div class="stage">
+      <div class="phone">
+        <div class="statusbar">
+          <span class="time">9:41</span>
+          <span class="glyphs" id="sb-glyphs"></span>
+        </div>
+        <div id="screen" style="flex: 1; display: flex; flex-direction: column; overflow: hidden"></div>
+        <div class="home-indicator"><span></span></div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
